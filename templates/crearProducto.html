@@ -342,10 +342,16 @@
         <div class="container">
             <div class="flex-w flex-tr">
                 <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-                    <form action="">
+                    <form action="{{ url_for('crear') }}" method="post">
                         <h4 class="mtext-105 cl2 txt-center p-b-30">
                             Nuevo Producto
                         </h4>
+
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <p class="stext-102 cl2 txt-center p-b-20">{{ messages[0] }}</p>
+                        {% endif %}
+                        {% endwith %}
                         <div>
                                 <div class=" mtext-102 class-group">
                                     <label for="">Referencia del Producto </label>
@@ -392,7 +398,7 @@
                                 
                                             <div class="size-204 respon6-next">
                                                 <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
+                                                    <select class="js-select2" name="talla">
                                                         <option>Seleccione la talla</option>
                                                         <option> S</option>
                                                         <option> M</option>
@@ -414,7 +420,7 @@
                                 
                                             <div class="size-204 respon6-next">
                                                 <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
+                                                    <select class="js-select2" name="color">
                                                         <option>Seleccione el color</option>
                                                         <option>Rojo</option>
                                                         <option>Amarillo</option>
