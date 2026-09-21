@@ -1,6 +1,11 @@
+import os
 import sqlite3
 
 from flask import current_app, g
+from werkzeug.security import generate_password_hash
+
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL', 'admin@indetex.com')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'admin123')
 
 SEED_PRODUCTS = [
     ('REF-01', 'Esprit Ruffle Shirt', 16.64, 25, 'product-01.jpg', 'women'),
@@ -49,6 +54,13 @@ def seed_db():
             'INSERT INTO product (ref, name, price, stock, image, category, description) '
             "VALUES (?, ?, ?, ?, ?, ?, 'Prenda en algodón fabricada por Indetex.')",
             SEED_PRODUCTS,
+        )
+        db.commit()
+
+    if db.execute('SELECT COUNT(*) FROM user WHERE is_admin = 1').fetchone()[0] == 0:
+        db.execute(
+            'INSERT INTO user (name, email, password_hash, is_admin) VALUES (?, ?, ?, 1)',
+            ('Admin', ADMIN_EMAIL, generate_password_hash(ADMIN_PASSWORD)),
         )
         db.commit()
 
