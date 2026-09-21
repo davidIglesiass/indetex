@@ -732,30 +732,10 @@
 	<!--===============================================================================================-->
 	<script src="{{url_for('static',filename='vendor/sweetalert/sweetalert.min.js')}}"></script>
 	<script>
-		$('.js-addwish-b2').on('click', function (e) {
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(function () {
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function () {
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function () {
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
+		/* ponytail: theme originally faked "added to wishlist" with a
+		   preventDefault()+SweetAlert here, which now blocks the real
+		   /favoritos/agregar/<id> link. Removed so the click actually
+		   navigates and persists. */
 
 		/*---------------------------------------------*/
 
