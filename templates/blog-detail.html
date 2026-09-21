@@ -423,7 +423,18 @@
 								Your email address will not be published. Required fields are marked *
 							</p>
 
-							<form>
+							{% if comments %}
+							<div class="p-b-30">
+								{% for comment in comments %}
+								<div class="p-b-15">
+									<p class="stext-102 cl6"><strong>{{ comment['name'] }}</strong> — {{ comment['created_at'] }}</p>
+									<p class="stext-102 cl6">{{ comment['body'] }}</p>
+								</div>
+								{% endfor %}
+							</div>
+							{% endif %}
+
+							<form action="{{ url_for('comentar_blog') }}" method="post">
 								<div class="bor19 m-b-20">
 									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
 								</div>

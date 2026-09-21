@@ -396,17 +396,22 @@
 
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <form action="#">
-                                
+                        <form action="{{ url_for('editar', product_id=product['id']) }}" method="post">
+
                                     <h4 class="mtext-105 cl2 txt-center p-b-30">
                                         Editar Producto
                                     </h4>
-                                   
+
+                                    {% with messages = get_flashed_messages() %}
+                                    {% if messages %}
+                                    <p class="stext-102 cl2 txt-center p-b-20">{{ messages[0] }}</p>
+                                    {% endif %}
+                                    {% endwith %}
 
                                     <div class=" mtext-102 class-group">
                                         <label for="">Referencia del Producto </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="refProducto" placeholder="12554878">
+                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="refProducto" value="{{ product['ref'] }}" placeholder="12554878">
                                             <img class="how-pos4 pointer-none" src="images/icons/icon-hash.png" alt="ICON" height="25"
                                             style="opacity:0.25;">
                                         </div>
@@ -414,16 +419,16 @@
                                     <div class=" mtext-102 class-group">
                                         <label for="">Productos en Stock </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="stockProducto" placeholder="25">
+                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="stockProducto" value="{{ product['stock'] }}" placeholder="25">
                                             <img class="how-pos4 pointer-none" src="images/icons/icon-stock.png" alt="ICON" height="25"
                                             style="opacity:0.25;">
                                         </div>
                                     </div>
-                                
+
                                     <div class=" mtext-102 class-group">
                                         <label for=""> Nombre del Producto </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombreProducto" placeholder="Lightweight Jacket">
+                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="nombreProducto" value="{{ product['name'] }}" placeholder="Lightweight Jacket">
                                             <img class="how-pos4 pointer-none" src="images/icons/icon-rompa.png" alt="ICON" height="25"
                                             style="opacity:0.25;">
                                         </div>
@@ -432,7 +437,7 @@
                                     <div class=" mtext-102 class-group">
                                         <label for=""> Precio de Producto </label>
                                     <div class="bor8 m-b-20 how-pos4-parent">
-                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" name="precioProducto" placeholder="58.79">
+                                            <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="number" step="0.01" name="precioProducto" value="{{ product['price'] }}" placeholder="58.79">
                                             <img class="how-pos4 pointer-none" src="images/icons/icon-precio.png" alt="ICON" height="25"
                                             style="opacity:0.25;">
                                         </div>
@@ -449,7 +454,7 @@
                                         
                                                 <div class="size-204 respon6-next">
                                                     <div class="rs1-select2 bor8 bg0">
-                                                        <select class="js-select2" name="time">
+                                                        <select class="js-select2" name="talla">
                                                             <option>Seleccione la talla</option>
                                                             <option> S</option>
                                                             <option> M</option>
@@ -471,7 +476,7 @@
                                     
                                                 <div class="size-204 respon6-next">
                                                     <div class="rs1-select2 bor8 bg0">
-                                                        <select class="js-select2" name="time">
+                                                        <select class="js-select2" name="color">
                                                             <option>Seleccione el color</option>
                                                             <option>Rojo</option>
                                                             <option>Amarillo</option>
@@ -491,7 +496,7 @@
                                     <div class="bor8 m-b-20 how-pos4-parent">
                                         <div class="bor8 m-b-30">
                                                                     <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="desProducto"
-                                                                        placeholder="Prenda en algodón "></textarea>
+                                                                        placeholder="Prenda en algodón ">{{ product['description'] }}</textarea>
                                                                 </div>
                                         </div>
                                     </div>
