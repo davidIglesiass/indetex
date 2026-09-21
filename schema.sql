@@ -1,0 +1,49 @@
+CREATE TABLE IF NOT EXISTS user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    is_admin INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS product (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ref TEXT,
+    name TEXT NOT NULL,
+    price REAL NOT NULL,
+    stock INTEGER NOT NULL DEFAULT 0,
+    image TEXT NOT NULL DEFAULT 'product-01.jpg',
+    category TEXT NOT NULL DEFAULT 'women',
+    description TEXT
+);
+
+CREATE TABLE IF NOT EXISTS cart_item (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES user(id),
+    product_id INTEGER NOT NULL REFERENCES product(id),
+    quantity INTEGER NOT NULL DEFAULT 1,
+    UNIQUE(user_id, product_id)
+);
+
+CREATE TABLE IF NOT EXISTS wishlist_item (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES user(id),
+    product_id INTEGER NOT NULL REFERENCES product(id),
+    UNIQUE(user_id, product_id)
+);
+
+CREATE TABLE IF NOT EXISTS contact_message (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS comment (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT,
+    website TEXT,
+    body TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
